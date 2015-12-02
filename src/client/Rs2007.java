@@ -8,6 +8,8 @@ import java.util.*;
 
 import javax.swing.*;
 
+import client.plugins.Screenshot;
+
 import java.io.IOException;
 import java.text.ParseException;
 
@@ -17,13 +19,14 @@ public class Rs2007 extends JFrame implements AppletStub {
 	private static final HashMap<String, String> parameters = new HashMap<String, String>();
 	private static Class<?> clientClass;
 	private static Object client;
-	private static String homePath = System.getProperty("user.home");
-	static JFrame mainFrame;
+	public static String homePath = System.getProperty("user.home");
+	public static JFrame mainFrame;
 	//private JFrame worldMapFrame;
 	private JPanel loadingPanel, gamePanel;
 	private ImageIcon icon;
 	private Point start;
 	private int x, y;
+	private int ss;
 	private String worldID, onTop, resize;
 	//private boolean worldMapInitiated = false;
 	private boolean gameInitiated = false;
@@ -32,7 +35,7 @@ public class Rs2007 extends JFrame implements AppletStub {
 	private ClassLoader classLoader;
 	
 	public Rs2007(){
-		mainFrame = new JFrame("Old School RuneScape");
+		mainFrame = new JFrame(Config.ClientTitle);
 		mainFrame.setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		mainFrame.setResizable(resizable);
 		icon = new ImageIcon(this.getClass().getResource("/images/icon/icon.png"));
@@ -137,6 +140,7 @@ public class Rs2007 extends JFrame implements AppletStub {
 		}else{
 			onTop = "false";
 		}
+		
 		File theDir = new File(homePath + "/Old School RuneScape");
 		if(!theDir.exists()){
 			theDir.mkdir();
@@ -176,6 +180,7 @@ public class Rs2007 extends JFrame implements AppletStub {
 			y = 0;
 			onTop = "false";
 			resize = "false";
+			ss = 0;
 			System.out.println("No settings found.");
 			System.out.println("(X.Y) set to (0.0), and client on top is set to false. Resizeable is set to false.");
 		}
@@ -183,10 +188,10 @@ public class Rs2007 extends JFrame implements AppletStub {
 			mainFrame.setAlwaysOnTop(true);
 			alwaysOnTop = true;
 		}
-		//if(resize.equals("true")){
-		//	mainFrame.setResizable(true);
-		//	resizable = true;
-		//}
+		if(resize.equals("true")){
+			mainFrame.setResizable(true);
+			resizable = true;
+		}
 	}
 	private void buildMenuBar(){
 		JPopupMenu.setDefaultLightWeightPopupEnabled(false);
@@ -331,7 +336,7 @@ public class Rs2007 extends JFrame implements AppletStub {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try{
-					java.awt.Desktop.getDesktop().browse(java.net.URI.create("http://oldschool.runescape.com/oldschool_index"));
+					java.awt.Desktop.getDesktop().browse(java.net.URI.create(Config.osmain));
 				}catch (Exception e1){
 					System.out.println(e1);
 				}
@@ -341,7 +346,7 @@ public class Rs2007 extends JFrame implements AppletStub {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try{
-					java.awt.Desktop.getDesktop().browse(java.net.URI.create("http://services.runescape.com/m=poll/oldschool/index.ws"));
+					java.awt.Desktop.getDesktop().browse(java.net.URI.create(Config.ospoll));
 				}catch (Exception e1){
 					System.out.println(e1);
 				}
@@ -351,7 +356,7 @@ public class Rs2007 extends JFrame implements AppletStub {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try{
-					java.awt.Desktop.getDesktop().browse(java.net.URI.create("http://services.runescape.com/m=forum/forums.ws#group63"));
+					java.awt.Desktop.getDesktop().browse(java.net.URI.create(Config.osforum));
 				}catch (Exception e1){
 					System.out.println(e1);
 				}
@@ -361,7 +366,7 @@ public class Rs2007 extends JFrame implements AppletStub {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				try{
-					java.awt.Desktop.getDesktop().browse(java.net.URI.create("http://services.runescape.com/m=hiscore_oldschool/overall.ws"));
+					java.awt.Desktop.getDesktop().browse(java.net.URI.create(Config.oshiscore));
 				}catch (Exception e1){
 					System.out.println(e1);
 				}

@@ -1,4 +1,4 @@
-package client;
+package client.plugins;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
@@ -15,7 +15,6 @@ import javax.imageio.ImageIO;
 //
 // All Information regarding Screenshots are found here.
 //
-//
 
 public class Screenshot {
 	
@@ -25,11 +24,9 @@ public class Screenshot {
 	static int mainFrameWidth = Rs2007.mainFrame.getWidth();
 	static int mainFrameHight = Rs2007.mainFrame.getHeight() - 54;
 	
+	
 	public static void screenshot() throws
     AWTException, IOException, ParseException {
-		
-		
-        String datetime = currentDateTime();
 		
 	     // capture mainframe
 	     BufferedImage screencapture = new Robot().createScreenCapture(
@@ -46,20 +43,13 @@ public class Screenshot {
 			if(!theDir1.exists()){
 				theDir1.mkdir();
 			}
-			try{
+			/**try{
 				//SAVES AS PNG, IF folders above are found.
-				File file = new File(homePath + "/Old School RuneScape/Screenshots/" + datetime  + ".png");
-			     ImageIO.write(screencapture, "png", file);
+				File file = new File(homePath + "/Old School RuneScape/Screenshots/" +  + ".png");
+			    ImageIO.write(screencapture, "png", file);
 			}catch(IOException a){
 				//If folders cannot be found or can not save file, Prints ln. 
 				System.out.println("Failed to save Screenshot.");
-			}
+			}**/
 	  }
-	
-	public static String currentDateTime() {
-	    DateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-	    Calendar cal = Calendar.getInstance();
-	    String cal1 = dateFormat.format(cal.getTime());
-	    return cal1;
-	}
 }
